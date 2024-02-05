@@ -1,0 +1,49 @@
+name: Despliegue de Aplicación .NET Framework 4.6
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout código
+      uses: actions/checkout@v2
+
+    - name: Configurar MSBuild
+      uses: microsoft/setup-msbuild@v1.0.2
+
+    - name: Restaurar dependencias
+      run: nuget restore
+
+    - name: Compilar el proyecto
+      run: msbuild /p:Configuration=Release
+
+    - name: Empaquetar la aplicación
+      run: |
+        # Puedes copiar el ejecutable a una carpeta de despliegue
+        Copy-Item -Path .\bin\Release\YourApp.exe -Destination \\tu-servidor\carpeta-despliegue\ -Force
+
+        # También puedes copiar cualquier otro archivo necesario para la aplicación, como archivos de configuración.
+
+        # Ejemplo: Copiar archivo de configuración
+        Copy-Item -Path .\bin\Release\YourApp.config -Destination \\tu-servidor\carpeta-despliegue\ -Force
+
+    - name: Desplegar y Configurar
+      run: |
+        # Puedes realizar configuraciones adicionales aquí, si es necesario.
+
+        # Ejemplo: Actualizar configuración en un archivo de texto
+        # (Esto es solo un ejemplo, ajusta según tus necesidades)
+        (Get-Content \\tu-servidor\carpeta-despliegue\YourApp.config) -replace 'oldSetting', 'newSetting' | Set-Content \\tu-servidor\carpeta-despliegue\YourApp.config
+
+        # Puedes reiniciar servicios o realizar otras acciones necesarias para la configuración.
+
+        # Ejemplo: Reiniciar servicio de la aplicación
+        # Restart-Service -Name "YourAppService"
+
+      env:
+        ASPNETCORE_ENVIRONMENT: Production
