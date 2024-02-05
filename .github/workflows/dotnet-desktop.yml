@@ -3,7 +3,7 @@ name: Despliegue de Aplicación .NET Framework 4.6
 on:
   push:
     branches:
-      - main
+      - develop
 
 jobs:
   build:
@@ -20,7 +20,9 @@ jobs:
     #  run: nuget restore
 
     - name: Compilar el proyecto
-      run: msbuild "ConsoleApp1\ConsoleApp1.csproj" /p:Configuration=Release /p:DeployOnBuild=true
+      run: msbuild ConsoleApp1\ConsoleApp1.csproj  /p:Configuration=Release
+    #  run: msbuild /p:Configuration=Release /p:DeployOnBuild=true
+       
 
     - name: Empaquetar la aplicación
       run: |
