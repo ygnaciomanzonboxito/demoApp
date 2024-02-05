@@ -3,7 +3,7 @@ name: Despliegue de Aplicación .NET Framework 4.6
 on:
   push:
     branches:
-      - develop
+      - main
 
 jobs:
   build:
