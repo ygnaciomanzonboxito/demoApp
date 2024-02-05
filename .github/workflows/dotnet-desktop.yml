@@ -20,7 +20,7 @@ jobs:
     #  run: nuget restore
 
     - name: Compilar el proyecto
-      run: msbuild /p:Configuration=Release
+      run: msbuild "ConsoleApp1\ConsoleApp1.csproj" /p:Configuration=Release /p:DeployOnBuild=true
 
     - name: Empaquetar la aplicación
       run: |
