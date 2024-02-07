@@ -26,12 +26,12 @@ jobs:
     - name: Empaquetar la aplicación
       run: |
         # Puedes copiar el ejecutable a una carpeta de despliegue
-        Copy-Item -Path ConsoleApp1\bin\Release\ConsoleApp1.exe -Destination \\TI-GW26ZD3\ -Force
+        Copy-Item -Path ConsoleApp1\bin\Release\ConsoleApp1.exe -Destination \\TI-GW26ZD3\Compartida\DemoApp -Force
 
         # También puedes copiar cualquier otro archivo necesario para la aplicación, como archivos de configuración.
 
         # Ejemplo: Copiar archivo de configuración
-        Copy-Item -Path ConsoleApp1\bin\Release\ConsoleApp1.exe.config -Destination \\TI-GW26ZD3\ -Force
+        Copy-Item -Path ConsoleApp1\bin\Release\ConsoleApp1.exe.config -Destination \\TI-GW26ZD3\Compartida\DemoApp -Force
 
     - name: Desplegar y Configurar
       run: |
@@ -39,7 +39,7 @@ jobs:
 
         # Ejemplo: Actualizar configuración en un archivo de texto
         # (Esto es solo un ejemplo, ajusta según tus necesidades)
-        (Get-Content \\TI-GW26ZD3\ConsoleApp1.exe.config) -replace 'oldSetting', 'newSetting' | Set-Content \\TI-GW26ZD3\ConsoleApp1.exe.config
+        (Get-Content \\TI-GW26ZD3\Compartida\DemoApp\ConsoleApp1.exe.config) -replace 'oldSetting', 'newSetting' | Set-Content \\TI-GW26ZD3\Compartida\DemoApp\ConsoleApp1.exe.config
 
         # Puedes reiniciar servicios o realizar otras acciones necesarias para la configuración.
 
